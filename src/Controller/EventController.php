@@ -14,6 +14,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class EventController extends AbstractController
 {
     #[Route('/', name: 'app_event_index', methods: ['GET'])]
+    /**
+     * list all event function
+     *
+     * @param EventRepository $eventRepository
+     * @return Response
+     */
     public function index(EventRepository $eventRepository): Response
     {
         return $this->render('event/index.html.twig', [
@@ -21,7 +27,9 @@ class EventController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_event_new', methods: ['GET', 'POST'])]
+    /**[Route('/new', name: 'app_event_new', methods: ['GET', 'POST'])] 
+     * Add new event
+     */
     public function new(Request $request, EventRepository $eventRepository): Response
     {
         $event = new Event();
@@ -39,7 +47,9 @@ class EventController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_event_show', methods: ['GET'])]
+    /**[Route('/{id}', name: 'app_event_show', methods: ['GET'])]
+     * Get Event Details
+     */
     public function show(Event $event): Response
     {
         return $this->render('event/show.html.twig', [
@@ -47,7 +57,9 @@ class EventController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_event_edit', methods: ['GET', 'POST'])]
+    /**[Route('/{id}/edit', name: 'app_event_edit', methods: ['GET', 'POST'])] 
+     * Edit Event details
+     */
     public function edit(Request $request, Event $event, EventRepository $eventRepository): Response
     {
         $form = $this->createForm(EventType::class, $event);
@@ -64,10 +76,12 @@ class EventController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_event_delete', methods: ['POST'])]
+    /**[Route('/{id}', name: 'app_event_delete', methods: ['POST'])]
+     * Delete Event 
+     */
     public function delete(Request $request, Event $event, EventRepository $eventRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$event->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $event->getId(), $request->request->get('_token'))) {
             $eventRepository->remove($event);
         }
 

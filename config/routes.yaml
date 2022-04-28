@@ -1,3 +1,26 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+
+app_event_index:
+  path: /event
+  controller: App\Controller\EventController::index
+
+app_event_new:
+  path: /event/create
+  controller: App\Controller\EventController::new
+app_event_show:
+  path: event/{id}
+  controller: App\Controller\EventController::show
+app_event_edit:
+  path: event/{id}
+  controller: App\Controller\EventController::edit
+  methods:    PUT
+app_event_delete:
+  path: event/{id}
+  controller: App\Controller\EventController::delete
+  methods:    DELETE
+
+app_login:
+  path: login
+  controller: App\Controller\AuthController::login
